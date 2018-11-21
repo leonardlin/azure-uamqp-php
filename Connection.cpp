@@ -17,6 +17,7 @@ void Connection::__construct(Php::Parameters &params)
     keyName = params[3].stringValue();
     key     = params[4].stringValue();
     debug   = params.size() == 6 ? params[5].boolValue() : false;
+    clientname    = params.size() == 7 ? params[6].stringValue(): "some";
 }
 
 void Connection::connect()
@@ -56,7 +57,7 @@ void Connection::connect()
     }
 
     /* create the connection */
-    connection = connection_create(useAuth ? sasl_io : socket_io, host.c_str(), "some", NULL, NULL);
+    connection = connection_create(useAuth ? sasl_io : socket_io, host.c_str(), clientname.c_str(), NULL, NULL);
     if (isDebugOn()) {
         connection_set_trace(connection, true);
     }

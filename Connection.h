@@ -19,6 +19,7 @@ private:
     std::string keyName;
     std::string key;
     bool debug;
+    std::string clientname;
     bool isConnected = false;
     bool closeRequested = false;
 
