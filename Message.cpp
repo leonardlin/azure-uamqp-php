@@ -95,9 +95,11 @@ Message::Message()
 
     application_properties = amqpvalue_create_map();
     annotations_map = amqpvalue_create_map();
+    properties_map = properties_create();
 
     message_set_application_properties(message, application_properties);
     add_amqp_message_annotation(message, annotations_map);
+    message_set_properties(message, properties_map);
 }
 
 void Message::__construct(Php::Parameters &params)
@@ -228,3 +230,6 @@ void Message::setMessageHandler(MESSAGE_HANDLE message)
     this->message = message;
 }
 
+void Message::setPropertyContentType(Php::Parameters &params) {
+    properties_set_content_type(properties_map, params[0].stringValue().c_str());
+}
